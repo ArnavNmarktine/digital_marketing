@@ -1,4 +1,5 @@
 import streamlit as st 
+import numpy as np
 import pandas as pd 
 import random
 import matplotlib.pyplot as plt
@@ -6,7 +7,7 @@ import warnings
 # Ignore all warnings (Not recommended in most cases)
 warnings.filterwarnings("ignore")
 
-from utils import user_by_date
+from utils import user_by_date,plot
 
 
 a={'organic_search':51,'Direct':16,'Referral':14,'Social':10,'Other':5,'paid_search':2,'Affiliates':1,'Display':1 }
@@ -48,11 +49,19 @@ st.sidebar.header("Set Channel View distribtuion")
 
 try:
 
-    df = user_by_date(start_date,end_date,a)
-    st.write(df)
+    data = user_by_date(start_date,end_date,a)
+    st.write(data)
 except Exception as e:
     print(e) 
  
 
 
 st.sidebar.header("Set Channel View distribtuion")
+
+
+try :
+   plt = plot(data)
+   st.pyplot(plt)
+except Exception as e:
+   print(e)
+   
